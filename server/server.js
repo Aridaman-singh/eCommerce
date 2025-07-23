@@ -9,6 +9,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const apiRoutes = require('./routes/api.routes');
+const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 const PORT = 5001;
@@ -19,6 +20,7 @@ app.use(express.json()); // Parse JSON bodies
 
 // API Routes
 app.use('/api', apiRoutes);
+app.use('/api/auth', authRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {

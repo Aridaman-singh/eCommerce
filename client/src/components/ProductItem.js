@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../utils/axiosConfig';
 
 function ProductItem({ product }) {
   const [adding, setAdding] = useState(false);
   const [added, setAdded] = useState(false);
-  const [error, setError] = useState(''); // Added state for local error messages
+  const [error, setError] = useState(''); // Add state for local error messages
 
   const handleAddToCart = async () => {
     setAdding(true);

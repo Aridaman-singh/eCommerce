@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import ProductItem from './ProductItem'; // Assuming ProductItem.js is in the same directory
+import axios from '../utils/axiosConfig';
+import ProductItem from './ProductItem'; 
 
 // Define the initial number of products to show
 const INITIAL_PRODUCTS_LIMIT = 9;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../utils/axiosConfig';
 
-function Cart() { // Renamed to Cart for standard component naming
+function Cart() { 
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(''); // For user messages like errors
@@ -91,19 +91,19 @@ function Cart() { // Renamed to Cart for standard component naming
           <div>
             <ul className="divide-y divide-gray-200">
               {cart.map(item => (
-                <li key={item._id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-4"> {/* Changed items-center to items-start for better vertical alignment on small screens */}
-                  <div className="flex items-start w-full sm:w-auto mb-4 sm:mb-0"> {/* Changed items-center to items-start */}
+                <li key={item._id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-4"> {}
+                  <div className="flex items-start w-full sm:w-auto mb-4 sm:mb-0"> {}
                     <img
                       src={item.product?.imageUrl || `https://placehold.co/64x64/E0E0E0/333333?text=No+Image`}
                       alt={item.product?.name || 'Product Image'}
                       className="w-16 h-16 object-cover mr-4 rounded-md shadow-sm"
                       onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/E0E0E0/333333?text=No+Image`; }}
                     />
-                    <div className="flex-1 flex flex-col"> {/* Added flex flex-col to stack name, price, and quantity controls */}
+                    <div className="flex-1 flex flex-col"> {}
                       <div className="font-semibold text-lg text-gray-800">{item.product?.name}</div>
-                      <div className="text-gray-600 mb-2">Rs.{item.product?.price?.toFixed(2)}</div> {/* Added mb-2 for spacing */}
+                      <div className="text-gray-600 mb-2">Rs.{item.product?.price?.toFixed(2)}</div> {}
 
-                      {/* Quantity Controls - Moved here */}
+                      {}
                       <div className="flex items-center space-x-2"> 
                         <button
                           onClick={() => handleDecrementQuantityOrRemove(item.product._id)}
