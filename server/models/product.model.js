@@ -16,4 +16,7 @@ const productSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Product', productSchema); 
+// This ensures that no two products can have the same combination of name, price, and imageUrl.
+productSchema.index({ name: 1, price: 1, imageUrl: 1 }, { unique: true });
+
+module.exports = mongoose.model('Product', productSchema);

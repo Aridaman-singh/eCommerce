@@ -27,9 +27,15 @@ router.post('/products', async (req, res) => {
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (err) {
+    // --- NEW: Handle duplicate key error specifically ---
+    if (err.code === 11000) { // MongoDB duplicate key error code
+      return res.status(409).json({ error: 'Product with this name, price, and image already exists.' });
+    }
+    console.error('Failed to add product:', err);
     res.status(500).json({ error: 'Failed to add product' });
   }
 });
+
 
 // ------------------- Cart Routes -------------------
 
@@ -49,34 +55,57 @@ router.post('/cart', async (req, res) => {
   if (!productId) {
     return res.status(400).json({ error: 'Product ID is required' });
   }
+
   try {
-    // Check if product exists
-    const product = await Product.findById(productId);
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
+    let cartItem = await Cart.findOne({ product: productId });
+
+    if (cartItem) {
+      cartItem.quantity += 1;
+      await cartItem.save();
+      await cartItem.populate('product');
+      return res.status(200).json(cartItem);
+    } else {
+      const product = await Product.findById(productId);
+      if (!product) {
+        return res.status(404).json({ error: 'Product not found' });
+      }
+
+      const newCartItem = new Cart({ product: productId, quantity: 1 });
+      await newCartItem.save();
+      await newCartItem.populate('product');
+      return res.status(201).json(newCartItem);
     }
-    // Add to cart
-    const cartItem = new Cart({ product: productId });
-    await cartItem.save();
-    res.status(201).json(cartItem);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to add to cart' });
+    console.error('Failed to add/update cart item:', err);
+    res.status(500).json({ error: 'Failed to add/update cart item' });
   }
 });
 
 // DELETE /api/cart/:productId - Remove a product from the cart
 router.delete('/cart/:productId', async (req, res) => {
   const { productId } = req.params;
+
   try {
-    // Remove one cart item with the given productId
-    const deleted = await Cart.findOneAndDelete({ product: productId });
-    if (!deleted) {
+    let cartItem = await Cart.findOne({ product: productId });
+
+    if (!cartItem) {
       return res.status(404).json({ error: 'Product not found in cart' });
     }
-    res.json({ message: 'Product removed from cart' });
+
+    if (cartItem.quantity > 1) {
+      cartItem.quantity -= 1;
+      await cartItem.save();
+      await cartItem.populate('product');
+      res.json({ message: 'Product quantity decremented', cartItem });
+    } else {
+      await Cart.deleteOne({ _id: cartItem._id });
+      res.json({ message: 'Product removed from cart' });
+    }
   } catch (err) {
-    res.status(500).json({ error: 'Failed to remove from cart' });
+    console.error('Failed to remove/decrement from cart:', err);
+    res.status(500).json({ error: 'Failed to remove/decrement from cart' });
   }
 });
 
-module.exports = router; 
+module.exports = router;
+
