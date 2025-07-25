@@ -33,7 +33,7 @@ function AppContent() {
           {isAuthenticated ? (
             <>
               <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium">Shop</Link>
-              <Link to="/cart" className="text-gray-700 hover:text-blue-600 font-medium">Cart</Link>
+              <Link to="/cart" className="text-gray-700 hover:text-blue-600 font-medium">Cart</Link> {/*to have a cart page*/}
               <button
                 onClick={logout}
                 className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-200"
@@ -65,10 +65,10 @@ function AppContent() {
                   <h2 className="text-3xl font-bold text-blue-700 mb-6 text-center lg:text-left">Products</h2>
                   <ProductList />
                 </div>
-                <div className="w-full md:w-1/3 bg-white rounded-xl shadow-lg p-6">
+                {/* <div className="w-full md:w-1/3 bg-white rounded-xl shadow-lg p-6">
                   <h2 className="text-3xl font-bold text-blue-700 mb-6 text-center lg:text-left">Your Shopping Cart</h2>
                   <Cart />
-                </div>
+                </div> */} {/*moved the cart section to different page*/}
               </div>
             } />
             <Route path="/cart" element={

@@ -3,7 +3,7 @@ import axios from '../utils/axiosConfig';
 import ProductItem from './ProductItem'; 
 
 // Define the initial number of products to show
-const INITIAL_PRODUCTS_LIMIT = 9;
+const INITIAL_PRODUCTS_LIMIT = 6;
 
 function ProductList() {
   const [products, setProducts] = useState([]);

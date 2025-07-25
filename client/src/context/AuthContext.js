@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
       try {
         const decoded = jwtDecode(token);
         if (decoded.exp * 1000 > Date.now()) {
-          setUser({ id: decoded.userId });
+          setUser({ id: decoded.userId, username: decoded.username });
           setIsAuthenticated(true);
         } else {
           logout();
