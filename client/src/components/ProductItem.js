@@ -11,7 +11,7 @@ function ProductItem({ product }) {
     setAdded(false); // Reset 'added' state on new attempt
     setError(''); // Clear previous errors
     try {
-      await axios.post('http://localhost:5001/api/cart', { productId: product._id });
+      await axios.post('/api/cart', { productId: product._id });
       setAdded(true);
       // Dispatch custom event to notify Cart component to refresh
       window.dispatchEvent(new CustomEvent('cart-updated'));
@@ -39,7 +39,7 @@ function ProductItem({ product }) {
       />
       <div className="flex-grow flex flex-col justify-between items-center w-full"> {/* Added flex-grow and flex-col */}
         <h4 className="font-semibold text-lg text-gray-800 mb-1 text-center">{product.name}</h4>
-        <p className="text-blue-700 font-bold mb-3">Rs.{product.price.toFixed(2)}</p>
+        <p className="text-blue-700 font-bold mb-3">Rs.{product.price}</p>
         
         {error && ( // Display local error message if any
           <p className="text-red-600 text-sm mb-2">{error}</p>

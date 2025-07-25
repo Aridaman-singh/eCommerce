@@ -61,7 +61,7 @@ function AppContent() {
           <Route element={<PrivateRoute><Outlet /></PrivateRoute>}>
             <Route path="/" element={
               <div className="flex flex-col lg:flex-row gap-8">
-                <div className="flex-1 md:mr-8 bg-white rounded-xl shadow-lg p-6">
+                <div className="flex-1 md:mr-8 bg-gray-100 rounded-xl shadow-lg p-6">
                   <h2 className="text-3xl font-bold text-blue-700 mb-6 text-center lg:text-left">Products</h2>
                   <ProductList />
                 </div>

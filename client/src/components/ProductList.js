@@ -17,7 +17,7 @@ function ProductList() {
       setLoading(true);
       setError('');
       try {
-        const res = await axios.get('http://localhost:5001/api/products');
+        const res = await axios.get('/api/products');
         setProducts(res.data);
         // Reset visibleCount to initial limit if new products are fetched
         setVisibleCount(INITIAL_PRODUCTS_LIMIT); 

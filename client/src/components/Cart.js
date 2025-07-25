@@ -44,7 +44,7 @@ function Cart() {
     try {
       // The DELETE request on the backend now handles decrementing quantity
       // or removing the item if quantity becomes 0
-      await axios.delete(`http://localhost:5001/api/cart/${productId}`);
+      await axios.delete(`/api/cart/${productId}`);
       fetchCart(); // Re-fetch cart to update UI with new quantities
     } catch (error) {
       console.error('Error decrementing or removing item:', error);
@@ -57,7 +57,7 @@ function Cart() {
     setMessage(''); // Clear previous messages
     try {
       // The POST request on the backend now handles incrementing quantity
-      await axios.post('http://localhost:5001/api/cart', { productId });
+      await axios.post('/api/cart', { productId });
       fetchCart(); // Re-fetch cart to update UI with new quantities
     } catch (error) {
       console.error('Error incrementing item quantity:', error);

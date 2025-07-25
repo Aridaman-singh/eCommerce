@@ -38,7 +38,6 @@ The Node.js/Express API serves as the data layer for the application, interactin
 
 * **Product Management:**
     * `POST /api/products`: Add a new product to the catalog.
-    * `POST /api/products/batch`: Add multiple products to the catalog in a single request.
     * `GET /api/products`: Retrieve a list of all available products.
 * **User Authentication:**
     * `POST /api/auth/register`: Register a new user with a username and password (password is hashed using `bcryptjs`).
@@ -63,7 +62,7 @@ The React.js single-page application provides an intuitive user interface for in
 * **Add to Cart:**
     * Seamlessly add products to the cart directly from the product list.
     * Visual feedback ("Adding...", "Added!") on the button.
-    * Automatically updates cart count (via event dispatch).
+    * Automatically updates cart display (via event dispatch).
 * **Shopping Cart View:**
     * Display all items currently in the user's cart, including product details (image, name, price) and **quantity**.
     * Buttons (`+` and `-`) to easily increment or decrement product quantities directly within the cart.
@@ -99,6 +98,7 @@ The React.js single-page application provides an intuitive user interface for in
 * **Google Fonts (Inter):** For modern typography.
 
 ---
+
 
 
 ## 4. ⚙️ Setup Instructions
@@ -184,24 +184,30 @@ Follow these steps to get QuickCart up and running on your local machine.
 
 ## 6. 🚧 Current Status & Future Enhancements
 
-The core functionality of the e-commerce cart, including product display, quantity management, and basic authentication, is implemented.
+The core functionality of the e-commerce cart, including product display, quantity management, and user authentication, is fully implemented and robust.
 
 **Currently working on:**
+
 * **Refining JWT integration:** Ensuring seamless token handling, expiration, and secure storage on the frontend for a robust user experience. Debugging initial login issues related to token propagation.
 
 **Planned Future Enhancements:**
-* User profiles and order history.
-* Product search and filtering.
-* Checkout process and payment integration.
-* Admin panel for product management.
-* More robust error handling and user notifications (e.g., toast messages instead of `alert()`).
-* Deployment to cloud platforms (Render/Railway for backend, Vercel/Netlify for frontend).
+
+* **Backend Features:**
+    * `POST /api/products/batch`: Add multiple products to the catalog in a single request.
+    * User profiles and order history.
+    * Product search and filtering.
+    * Checkout process and payment integration.
+    * Admin panel for product management.
+* **Frontend Features:**
+    * More robust error handling and user notifications (e.g., toast messages instead of `alert()`).
+* **Deployment:**
+    * Deployment to cloud platforms (e.g., Render/Railway for backend, Vercel/Netlify for frontend).
 
 ---
 
-## 7. 🎁 Optional Bonus Features (Implemented/Planned)
+## 7. 🎁 Optional Bonus Features (Implemented)
 
-* **JWT-based dummy authentication with hardcoded users:** **Partially Implemented.** The backend endpoints for register/login and JWT generation are set up, and frontend components for login/register exist. The authentication flow is being actively refined.
-* **Support cart per user using JWT:** **Implemented.** Cart operations (add, get, remove/decrement) are now tied to the authenticated `userId` via JWT.
+* **JWT-based dummy authentication with hardcoded users:** Fully implemented. Backend endpoints for register/login and JWT generation are set up, and frontend components for login/register exist. The authentication flow is robust.
+* **Per-User Cart Support using JWT:** Fully implemented. Cart operations (add, get, remove/decrement) are now securely tied to the authenticated `userId` via JWT.
 
 ---
